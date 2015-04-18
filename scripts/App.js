@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { RouteHandler } from 'react-router';
 
 export default class App extends React.Component {
   render() {
     return (
-      <h1>Hello, world.</h1>
+      <RouteHandler {...this.props} key={this.props.pathname} />
     );
-  }
+  };
 }
