@@ -32,7 +32,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['react-hot', 'babel'],
+        loader: 'react-hot-loader!babel-loader',
         include: path.join(__dirname, 'scripts')
       },
       {
@@ -45,23 +45,19 @@ module.exports = {
       },
       {
         test: /\.gif/,
-        loaders: ['url-loader'],
-        query: {limit:10000, mimetype: 'image/gif'}
+        loader: 'url-loader?limit=10000&mimetype=image/gif'
       },
       {
         test: /\.jpg/,
-        loaders: ['url-loader'],
-        query: {limit:10000, mimetype: 'image/jpg'}
+        loader: 'url-loader?limit=10000&mimetype=image/jpg'
       },
       {
         test: /\.png/,
-        loaders: ['url-loader'],
-        query: {limit:10000, mimetype: 'image/png'}
+        loader: 'url-loader?limit=10000&mimetype=image/png'
       },
       {
         test: /\.svg/,
-        loaders: ['url-loader'],
-        query: {limit:10000, mimetype: 'image/svg+xml'}
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
       }
     ]
   }

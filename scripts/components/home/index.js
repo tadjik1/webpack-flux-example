@@ -1,35 +1,56 @@
 import React from 'react';
 import connectToStores from 'flummox/connect';
+import './home.styl';
 
 class HomeHandler extends React.Component {
 
-    loadSeries() {
+    async loadSeries() {
         let seriesActions = this.props.flux.getActions('series');
-        return seriesActions.getAllSeries();
+        return await seriesActions.getAllSeries();
     };
 
     render() {
         let series = this.props.series.map( (series) => {
             return (
                 <div className="col-md-3">
-                    <h3>{series.title}</h3>
-                    <p>{series.description}</p>
+                    <div className="thumbnail">
+                        <img src={series.poster} alt={series.name}/>
+
+                        <div className="caption">
+                            <h3>{series.name}</h3>
+                            <p>{series.description}</p>
+                            <p>
+                                <a href={series.url} className="btn btn-primary" role="button">Watch it</a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             )
         });
+
+        let button = function () {
+            if (!this.props.series.length) {
+                return (
+                    <p>
+                        <button className="btn btn-primary btn-lg" onClick={this.loadSeries.bind(this)}>
+                            Load series
+                        </button>
+                    </p>
+                )
+            } else {
+                return (<span/>);
+            }
+        };
 
         return (
             <div className="container-fluid">
 
                 <div className="starter-template">
-                    <h1>Index page</h1>
-
-                    <p className="lead">Use document as a way to
-                        quickly start any project.<br/>
-                        All you get is text and a mostly barebones HTML document.
-                    </p>
+                    <div className="jumbotron">
+                        <h1>Hello, world!</h1>
+                        {button.call(this)}
+                    </div>
                 </div>
-                <button onClick={this.loadSeries.bind(this)}>Load Series</button>
                 <div className="row">
                     {series}
                 </div>
