@@ -15,9 +15,7 @@ export default class AboutHandler extends React.Component {
         </div>
       </div>
 
-    )
-  }
-
-;
+    );
+  };
 
 }

@@ -15,9 +15,7 @@ export default class ContactHandler extends React.Component {
         </div>
       </div>
 
-    )
-  }
-
-;
+    );
+  };
 
 }

@@ -15,11 +15,9 @@ export default class SeriesStore extends Store {
         poster: resizeImage(series.images, {width: 242, height: 200}),
         description: series.description.slice(0, 80) + '...',
         url: '/' + series.id
-      }
+      };
     });
-  }
-
-;
+  };
 
   constructor(flux) {
     super(); // Don't forget this step
@@ -31,23 +29,17 @@ export default class SeriesStore extends Store {
     this.state = {
       series: []
     };
-  }
-
-;
+  };
 
   handleSeries(response) {
     let series = SeriesStore.parse(response.items);
     this.setState({
       series: this.state.series.concat(series)
     });
-  }
-
-;
+  };
 
   getAllSeries() {
     return this.state.series;
-  }
-
-;
+  };
 
 }

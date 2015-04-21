@@ -24,7 +24,7 @@ router.run((Handler, state) => {
       <Handler {...state} />
     </FluxComponent>,
     document.body
-  )
+  );
 });
 
 document.onclick = event => {
