@@ -1,60 +1,106 @@
-var webpack = require('webpack');
-var path = require('path');
-
 module.exports = function (config) {
   config.set({
-
-    files: [
-      'scripts/**/*-test.js'
+    'frameworks': [
+      'mocha',
+      'chai-as-promised',
+      'chai',
+      'sinon'
     ],
-
-    browsers: ['Firefox'],
-
-    frameworks: ['mocha', 'chai-as-promised', 'chai', 'sinon'],
-
-    preprocessors: {
-      'scripts/**/*-test.js': ['webpack']
+    'browsers': ['PhantomJS'],
+    'files': [
+      './phantomjs-shim.js',
+      'scripts/**/__tests__/*.js'
+    ],
+    'preprocessors': {
+      'scripts/**/__tests__/*.js': ['webpack']
     },
-
-    coverageReporter: {
-      dir: 'coverage',
-      reporters: [
-        {type: 'text'},
-        {type: 'html'}
+    'webpackMiddleware': {'noInfo': true},
+    'reporters': [
+      'mocha',
+      'coverage',
+      'notify'
+    ],
+    'plugins': [
+      'karma-webpack',
+      'karma-mocha',
+      'karma-chai-as-promised',
+      'karma-chai',
+      'karma-sinon',
+      'karma-phantomjs-launcher',
+      'karma-firefox-launcher',
+      'karma-mocha-reporter',
+      'karma-coverage',
+      'karma-notify-reporter'
+    ],
+    'coverageReporter': {
+      'dir': 'coverage',
+      'reporters': [
+        {'type': 'html'}
       ]
     },
-
-    webpack: {
-      devtool: 'eval',
-      preLoaders: {
-        test: /\.jsx?$/,
-        exclude: /(__tests__|node_modules)/,
-        loader: 'isparta-instrumenter-loader'
+    'webpack': {
+      'entry': './scripts/index.js',
+      'debug': true,
+      'devtool': 'eval',
+      'output': {
+        'path': './build',
+        'publicPath': 'http://localhost:8080/',
+        'filename': 'index.js'
       },
-      module: {
-        loaders: [
+      'module': {
+        'preLoaders': [
           {
-            test: /\.jsx?$/,
-            loader: 'babel-loader',
-            include: path.join(__dirname, 'scripts')
+            'test': /\.js/,
+            'exclude': /(__tests__|node_modules)/,
+            'loader': 'isparta-instrumenter-loader'
+          }
+        ],
+        'loaders': [
+          {
+            'test': /\.js/,
+            'exclude': /node_modules/,
+            'loaders': ['babel']
           },
           {
-            test: /\.css$/,
-            loaders: ['null-loader']
+            'test': /\.js/,
+            'exclude': /node_modules/,
+            'loaders': [
+              'react-hot',
+              'babel'
+            ]
           },
           {
             test: /\.styl/,
-            loaders: ['null-loader']
+            loader: 'style!css!stylus'
+          },
+          {
+            test: /\.css$/,
+            loader: 'style!css'
+          },
+          {
+            test: /\.png$/,
+            loader: 'url?limit=100000&mimetype=image/png'
+          },
+          {
+            test: /\.svg$/,
+            loader: 'url?limit=100000&mimetype=image/svg+xml'
+          },
+          {
+            test: /\.gif$/,
+            loader: 'url?limit=100000&mimetype=image/gif'
+          },
+          {
+            test: /\.jpg$/,
+            loader: 'file'
           }
         ]
+      },
+      'resolve': {
+        'extensions': [
+          '',
+          '.js'
+        ]
       }
-    },
-
-    reporters: ['mocha', 'coverage', 'notify'],
-
-    webpackMiddleware: {
-      noInfo: true
     }
-
   });
 };
