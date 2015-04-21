@@ -8,10 +8,10 @@ import Contact from './components/contact';
 import NotFound from './components/notfound';
 
 export default (
-    <Route handler={App}>
-        <DefaultRoute name="home" handler={Home} />
-        <Route name="about" path="/about" handler={About} />
-        <Route name="contact" path="/contact" handler={Contact} />
-        <NotFoundRoute name="notfound" handler={NotFound}/>
-    </Route>
+  <Route handler={App}>
+    <DefaultRoute name="home" handler={Home}/>
+    <Route name="about" path="/about" handler={About}/>
+    <Route name="contact" path="/contact" handler={Contact}/>
+    <NotFoundRoute name="notfound" handler={NotFound}/>
+  </Route>
 );

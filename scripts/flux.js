@@ -4,11 +4,11 @@ import SeriesStore from './stores/SeriesStore';
 
 export default class AppFlux extends Flux {
 
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.createActions('series', SeriesActions);
-        this.createStore('series', SeriesStore, this);
-    }
+    this.createActions('series', SeriesActions);
+    this.createStore('series', SeriesStore, this);
+  }
 
 }
