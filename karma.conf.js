@@ -99,6 +99,6 @@ module.exports = function (config) {
         ]
       }
     },
-    singlerun: true
+    singleRun: true
   });
 };
