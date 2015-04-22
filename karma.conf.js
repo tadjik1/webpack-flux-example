@@ -27,16 +27,13 @@ module.exports = function (config) {
       'karma-chai',
       'karma-sinon',
       'karma-phantomjs-launcher',
-      'karma-firefox-launcher',
       'karma-mocha-reporter',
       'karma-coverage',
       'karma-notify-reporter'
     ],
     'coverageReporter': {
-      'dir': 'coverage',
-      'reporters': [
-        {'type': 'html'}
-      ]
+      type: 'lcovonly',
+      dir: 'coverage/'
     },
     'webpack': {
       'entry': './scripts/index.js',
@@ -101,6 +98,7 @@ module.exports = function (config) {
           '.js'
         ]
       }
-    }
+    },
+    singlerun: true
   });
 };
